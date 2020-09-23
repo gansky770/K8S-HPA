@@ -1,0 +1,20 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: myapp-pod-autoscaler
+  namespace: hpa
+spec:
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: myapp-deployment
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Object
+    object:
+      target:
+        kind: Service
+        name: myapp-svc
+      metricName: net.http.request.count
+      targetValue: 5
