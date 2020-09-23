@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: myapp-deployment
+  namespace: hpa
 spec:
   replicas: 3
   selector:
@@ -17,4 +18,4 @@ spec:
         image: nginx:latest 
         ports:
         - name: myapp-port
-          containerPort: 80
+          containerPort: 8080
